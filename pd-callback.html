@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="robots" content="noindex, nofollow">
+<title>Pipedrive 授權轉送</title>
+<style>body{font-family:system-ui,sans-serif;max-width:40rem;margin:3rem auto;padding:0 1rem;line-height:1.6}</style>
+</head>
+<body>
+<h1>正在轉回 GoTrust OMS…</h1>
+<p>這個頁面只負責把 Pipedrive 的授權結果轉交給公司內部的 OMS，不保存任何資料。</p>
+<p id="manual" hidden>沒有自動跳轉？請確認電腦已連上公司內網或 Tailscale，然後 <a id="link" href="#">按這裡繼續</a>。</p>
+<script>
+// Static relay for Pipedrive's public OAuth callback requirement. The internal OMS host is only
+// reachable inside the tailnet; the one-time code is useless without the server-side client secret.
+(function () {
+  var target = "https://oms.gotrustid.com/integrations/pipedrive/oauth/callback/" + window.location.search;
+  document.getElementById("link").href = target;
+  document.getElementById("manual").hidden = false;
+  window.location.replace(target);
+})();
+</script>
+</body>
+</html>
